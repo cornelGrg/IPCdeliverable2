@@ -1,0 +1,180 @@
+Architecture:          x86_64
+CPU op-mode(s):        32-bit, 64-bit
+Byte Order:            Little Endian
+CPU(s):                96
+On-line CPU(s) list:   0-95
+Thread(s) per core:    1
+Core(s) per socket:    24
+Socket(s):             4
+NUMA node(s):          4
+Vendor ID:             GenuineIntel
+CPU family:            6
+Model:                 85
+Model name:            Intel(R) Xeon(R) Gold 6252N CPU @ 2.30GHz
+Stepping:              7
+CPU MHz:               2300.000
+BogoMIPS:              4600.00
+Virtualization:        VT-x
+L1d cache:             32K
+L1i cache:             32K
+L2 cache:              1024K
+L3 cache:              36608K
+NUMA node0 CPU(s):     0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,92
+NUMA node1 CPU(s):     1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,81,85,89,93
+NUMA node2 CPU(s):     2,6,10,14,18,22,26,30,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,94
+NUMA node3 CPU(s):     3,7,11,15,19,23,27,31,35,39,43,47,51,55,59,63,67,71,75,79,83,87,91,95
+Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch epb cat_l3 cdp_l3 invpcid_single intel_ppin ssbd mba rsb_ctxsw ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm cqm mpx rdt_a avx512f avx512dq rdseed adx smap clflushopt clwb intel_pt avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local dtherm ida arat pln pts pku ospke avx512_vnni md_clear spec_ctrl intel_stibp flush_l1d arch_capabilities
+
+(The implicit version of this test runs with '-O2 -march=native -funroll-loops' flags)
+Matrix size 2^4:
+Sequential: wall clock time (avg of 5) = 7.63312e-06 sec
+Implicit: wall clock time (avg of 5) = 1.03861e-06 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  9.83477e-06	        (avg of 5)
+2	  1.44206e-05	        (avg of 5)
+4	  1.82144e-05	        (avg of 5)
+8	  1.85698e-05	        (avg of 5)
+16	  2.22206e-05	        (avg of 5)
+32	  2.94857e-05	        (avg of 5)
+64	  3.19183e-05	        (avg of 5)
+96	  0.00738352	        (avg of 5)
+
+-----------------------------------------
+
+Matrix size 2^5:
+Sequential: wall clock time (avg of 5) = 2.58997e-05 sec
+Implicit: wall clock time (avg of 5) = 2.0735e-06 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  3.07374e-05	        (avg of 5)
+2	  3.51153e-05	        (avg of 5)
+4	  4.18015e-05	        (avg of 5)
+8	  3.9728e-05	        (avg of 5)
+16	  3.67746e-05	        (avg of 5)
+32	  4.08687e-05	        (avg of 5)
+64	  4.61616e-05	        (avg of 5)
+96	  0.00542923	        (avg of 5)
+
+-----------------------------------------
+
+Matrix size 2^6:
+Sequential: wall clock time (avg of 5) = 7.51033e-05 sec
+Implicit: wall clock time (avg of 5) = 5.16325e-06 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  0.000102095	        (avg of 5)
+2	  0.000103208	        (avg of 5)
+4	  0.00011354	        (avg of 5)
+8	  8.55692e-05	        (avg of 5)
+16	  5.84133e-05	        (avg of 5)
+32	  5.20848e-05	        (avg of 5)
+64	  5.2993e-05	        (avg of 5)
+96	  6.18286e-05	        (avg of 5)
+
+-----------------------------------------
+
+Matrix size 2^7:
+Sequential: wall clock time (avg of 5) = 0.000301486 sec
+Implicit: wall clock time (avg of 5) = 1.83843e-05 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  0.000335275	        (avg of 5)
+2	  0.000319376	        (avg of 5)
+4	  0.000238232	        (avg of 5)
+8	  0.000241397	        (avg of 5)
+16	  0.000172118	        (avg of 5)
+32	  9.96858e-05	        (avg of 5)
+64	  7.93234e-05	        (avg of 5)
+96	  0.00447206	        (avg of 5)
+
+-----------------------------------------
+
+Matrix size 2^8:
+Sequential: wall clock time (avg of 5) = 0.000619415 sec
+Implicit: wall clock time (avg of 5) = 5.8379e-05 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  0.00116699	        (avg of 5)
+2	  0.000904638	        (avg of 5)
+4	  0.000533576	        (avg of 5)
+8	  0.000396597	        (avg of 5)
+16	  0.000246502	        (avg of 5)
+32	  0.00025861	        (avg of 5)
+64	  0.000176772	        (avg of 5)
+96	  0.00276739	        (avg of 5)
+
+-----------------------------------------
+
+Matrix size 2^9:
+Sequential: wall clock time (avg of 5) = 0.0021305 sec
+Implicit: wall clock time (avg of 5) = 0.000273228 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  0.00256938	        (avg of 5)
+2	  0.00187809	        (avg of 5)
+4	  0.00182498	        (avg of 5)
+8	  0.000736421	        (avg of 5)
+16	  0.000479015	        (avg of 5)
+32	  0.000363744	        (avg of 5)
+64	  0.000479185	        (avg of 5)
+96	  0.00194686	        (avg of 5)
+
+-----------------------------------------
+
+Matrix size 2^10:
+Sequential: wall clock time (avg of 5) = 0.00839523 sec
+Implicit: wall clock time (avg of 5) = 0.000743263 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  0.00848773	        (avg of 5)
+2	  0.00759276	        (avg of 5)
+4	  0.00456592	        (avg of 5)
+8	  0.00296851	        (avg of 5)
+16	  0.00174753	        (avg of 5)
+32	  0.00106217	        (avg of 5)
+64	  0.000815346	        (avg of 5)
+96	  0.00113106	        (avg of 5)
+
+-----------------------------------------
+
+Matrix size 2^11:
+Sequential: wall clock time (avg of 5) = 0.0356702 sec
+Implicit: wall clock time (avg of 5) = 0.00684887 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  0.0361078	        (avg of 5)
+2	  0.0303064	        (avg of 5)
+4	  0.021679	        (avg of 5)
+8	  0.0171058	        (avg of 5)
+16	  0.012265	        (avg of 5)
+32	  0.00737541	        (avg of 5)
+64	  0.00421796	        (avg of 5)
+96	  0.00362176	        (avg of 5)
+
+-----------------------------------------
+
+Matrix size 2^12:
+Sequential: wall clock time (avg of 5) = 0.161938 sec
+Implicit: wall clock time (avg of 5) = 0.0520566 sec
+
+OpenMP:
+N_threads|wall_clock_time (avg)|n_of_executions
+1	  0.176405	        (avg of 5)
+2	  0.13417	        (avg of 5)
+4	  0.0889845	        (avg of 5)
+8	  0.0549753	        (avg of 5)
+16	  0.0334793	        (avg of 5)
+32	  0.0215487	        (avg of 5)
+64	  0.0163414	        (avg of 5)
+96	  0.0137503	        (avg of 5)
+
+
