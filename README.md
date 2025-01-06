@@ -1,4 +1,4 @@
-# IPCdeliverable1
+# IPCdeliverable2
 ![Author](https://img.shields.io/badge/Author-Cornel%20Grigor%20235986-informational)
 ![Language](https://img.shields.io/badge/C++-8A2BE2)
 ![Language](https://img.shields.io/badge/Python-green)
@@ -24,7 +24,7 @@ For the best performance overall run *method1*.
 You can find already generated graphs inside every method's graph folder `/methodX/data/graphs/` to see the performance.
 
 ### Directory structure
-IPCdeliverable1/
+IPCdeliverable2/
 
 ```bash
 ├── method1     #Naive out-of-place
