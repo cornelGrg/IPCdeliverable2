@@ -1,63 +1,34 @@
 #include "../include/matTrans.h"
+#include "../include/support.h"
 #include <iostream>
 #include <mpi.h>
 
 
-bool checkSymMPI(const std::vector<std::vector<float>>& mat, int n){
+int checkSymMPI(const std::vector<float>& mat, int n, int mpi_rank, int mpi_size){
+    int rows_per_process = n / mpi_size;
+    int rows_reminder = n % mpi_size;
 
-    for (int i = 0; i < n; ++i) {
+    int start_row = (mpi_rank) * rows_per_process + std::min(mpi_rank, rows_reminder);
+    int end_row = start_row + rows_per_process + (mpi_rank < rows_reminder);
+
+    //check assigned portion of matrix
+    for (int i = start_row; i < end_row; ++i) {
         for (int j = 0; j < n; ++j) {
-            if (mat[i][j] != mat[j][i]) return false;
+            if (mat[i * n + j] != mat[j * n + i]) return 0;
         }
     }
-    return true;
+    return 1;
 }
 
-void matTransposeMPI(std::vector<std::vector<float>>& mat, int n){
-
-    for (int i = 0; i < n; ++i) {
-        for (int j = i + 1; j < n; ++j) {   //only check the upper triangle since mat is square
-            std::swap(mat[i][j], mat[j][i]);
-        }
-    }
-}
-
-void matTransposeFlattenedMPI(std::vector<float>& localMatrix, std::vector<float>& transposedMatrix, int n, int rank, int size) {
-    // Calcola il numero di righe che ogni processo deve gestire
+void matTransposeMPI(std::vector<float>& localMatrix, std::vector<float>& transposedMatrix, int n, int rank, int size) {
     int rowsPerProcess = n / size;
-    int remainingRows = n % size;  // Le righe rimanenti per i processi rimanenti
     int startRow = rank * rowsPerProcess;
     int endRow = (rank + 1) * rowsPerProcess;
 
-//    if (rank == size - 1) {
-//        endRow += remainingRows;  // L'ultimo processo prende anche le righe rimanenti
-//    }
-
-    // Prepara un array per la parte della matrice che questo processo gestir�
-
-    //std::vector<float> localtransposedMatrix(rowsPerProcess * n, 0.0f);
-
-    // Scatter: distribuiamo le righe della matrice originale tra i processi
-//    MPI_Scatter(flatMatrix.data(), rowsPerProcess * n, MPI_FLOAT, localMatrix.data(), rowsPerProcess * n, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
-    // Trasposizione locale: ognuno dei processi prende le righe e le trasforma in colonne
+    // local transpose
     for (int i = startRow; i < endRow; ++i) {
         for (int j = 0; j < n; ++j) {
-            transposedMatrix[j * n + i] = localMatrix[(i - startRow) * n + j]; //localtransposedMatrix
+            transposedMatrix[j * n + i] = localMatrix[(i - startRow) * n + j];
         }
     }
-    //MPI_Gather(localtransposedMatrix.data(), rowsPerProcess * n, MPI_FLOAT, transposedMatrix.data(), rowsPerProcess * n, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
-    // Ogni processo stampa la propria parte della matrice trasposta
-    //std::cout << "Processo " << rank << " ha trasposto le righe:\n";
-    //for (int i = startRow; i < endRow; ++i) {
-    //  for (int j = 0; j < n; ++j) {
-    //    std::cout << transposedMatrix[i * n + j] << " ";
-    //}
-    //std::cout << std::endl;
-    //}
-
-    //PER FANE ANDARE MET� TOLGO LA GATHER PIU CH LTRO TENGO COMMENTATA LA GATHER E  TOLGO LA LOCALTRANSPOSITIONMATRIX METTENDO LA TRANSPOSITIONMATRIX
 }
-
-

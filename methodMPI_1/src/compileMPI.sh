@@ -1,5 +1,6 @@
 #!/bin/bash
-#module load mpich...
+
+module load mpich-3.2.1--gcc-9.1.0
 
 #compilation
 mpicxx -c support.cpp -o ../build/support.o

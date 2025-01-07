@@ -2,14 +2,14 @@
 #define MATTRANS_H
 
 #include <vector>
+#include <algorithm>
 
 bool checkSymSEQ(const std::vector<std::vector<float>>& mat, int n);
-void matTransposeSEQ(std::vector<std::vector<float>>& mat, int n);
+void matTransposeSEQ(const std::vector<std::vector<float>>& mat, std::vector<std::vector<float>>& trans, int n);
 
 bool checkSymOMP(const std::vector<std::vector<float>>& mat, int n, int thN);
-void matTransposeOMP(std::vector<std::vector<float>>& mat, int n, int thN);
+void matTransposeOMP(const std::vector<std::vector<float>>& mat, std::vector<std::vector<float>>& trans, int n, int thN);
 
-bool checkSymMPI(const std::vector<std::vector<float>>& mat, int n);
-void matTransposeMPI(std::vector<std::vector<float>>& mat, int n);
-void matTransposeFlattenedMPI(std::vector<float>& localMatrix, std::vector<float>& transposedMatrix, int n, int rank, int size);
+int checkSymMPI(const std::vector<float>& mat, int n, int mpi_rank, int mpi_size);
+void matTransposeMPI(std::vector<float>& localMatrix, std::vector<float>& transposedMatrix, int n, int rank, int size);
 #endif
