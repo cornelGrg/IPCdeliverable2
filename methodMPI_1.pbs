@@ -1,0 +1,49 @@
+#!/bin/bash
+# Job name
+#PBS -N matTransposeMethodMPI_1
+# Output files
+#PBS -o ./pbsOutputs/matTransposeMethodMPI_1.o
+#PBS -e ./pbsOutputs/matTransposeMethodMPI_1.e
+# Queue name
+#PBS -q short_cpuQ
+# Set the maximum wall time
+#PBS -l walltime=0:10:00
+# Number of nodes, cpus, mpi processors and amount of memory (256mb was chosen for precaution since sometimes it used up to 200mb)
+#PBS -l select=1:ncpus=64:mpiprocs=64:mem=256mb
+
+# Modules for C
+module load mpich-3.2.1--gcc-9.1.0
+# Select the working directory CHANGE THE USERNAME
+cd /home/cornel.grigor/IPCdeliverable2/methodMPI_1/src
+
+#lscpu to verify configuration (everything was tested on nodes with 4x Intel Xeon Gold 6140M processors)
+lscpu
+echo
+
+#compilation
+mpicxx -c support.cpp -o ../build/support.o
+mpicxx -c main.cpp -fopenmp -o ../build/main.o
+mpicxx -c matTransSEQ.cpp -o ../build/matTransSEQ.o
+mpicxx -c matTransMPI.cpp -o ../build/matTransMPI.o
+mpicxx -c matTransOMP.cpp -fopenmp -o ../build/matTransOMP.o
+mpicxx ../build/support.o ../build/main.o ../build/matTransSEQ.o ../build/matTransMPI.o ../build/matTransOMP.o -fopenmp -o matTrans
+
+
+# Run code
+rm ../data/csv/OMPtime.csv
+rm ../data/csv/SEQtime.csv
+
+mpirun -np 1 ./matTrans
+echo
+echo "-----------------------------------------"
+echo
+
+rm ../data/csv/MPItime.csv
+
+mpirun -np 1 ./matTrans -mpi
+mpirun -np 2 ./matTrans -mpi
+mpirun -np 4 ./matTrans -mpi
+mpirun -np 8 ./matTrans -mpi
+mpirun -np 16 ./matTrans -mpi
+mpirun -np 32 ./matTrans -mpi
+mpirun -np 64 ./matTrans -mpi

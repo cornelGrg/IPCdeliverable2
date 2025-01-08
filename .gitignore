@@ -2,7 +2,3 @@
 .DS_Store
 graphsBackups/
 test/
-csv_backups/
-method1.pbs
-method2.pbs
-method3.pbs
