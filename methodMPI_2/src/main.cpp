@@ -5,7 +5,7 @@
 #include <mpi.h>
 #include <iostream>
 
-//In-Place transposition algorithm with MPI shared memory approach
+//Out-of-Place transposition algorithm with MPI with scatter local transpose and gather on shared memory approach
 int main(int argc, char** argv) {
     MPI_Init(&argc, &argv);
 

@@ -44,7 +44,7 @@ void matTransposeMPI(const std::vector<float>& mat, std::vector<float>& trans, i
             int globalCol = mpi_rank * rowsPerProcess + i;
             float value = localBlock[i * n + j];
 
-            MPI_Put(&value, 1, MPI_FLOAT, 0, globalRow * n + globalCol, 1, MPI_FLOAT, win);
+            MPI_Put(&value, 1, MPI_FLOAT, 0, globalRow * n + globalCol, 1, MPI_FLOAT, win);  //j*n+i
         }
     }
 

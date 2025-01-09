@@ -5,7 +5,7 @@
 #include <mpi.h>
 #include <iostream>
 
-//In-Place transposition algorithm with MPI local transpose and gather approach
+//Out-of-Place transposition algorithm with MPI with row divided and gather approach
 int main(int argc, char** argv) {
     MPI_Init(&argc, &argv);
 

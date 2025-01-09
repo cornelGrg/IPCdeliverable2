@@ -12,6 +12,7 @@ ompWEAK_csvfile = "../data/csv/csv_weakscaling/OMPtime.csv"
 mpiSTRONG_csvfile = "../data/csv/csv_strongscaling/MPItime.csv"
 ompSTRONG_csvfile = "../data/csv/csv_strongscaling/OMPtime.csv"
 seqSTRONG_csvfile = "../data/csv/csv_strongscaling/SEQtime.csv"
+comparemethods = "../data/csv/comparemethods.csv"
 
 def process_csv(filename):
     data = pd.read_csv(filename, delimiter=';')
@@ -42,23 +43,32 @@ def plot_omp_comparison1(filename):
     # Create a figure and axis for the plot
     plt.figure(figsize=(10, 6))
 
+    labels = {
+        12: "MPI [M1] Per row divided and gather approach",
+        13: "MPI [M2] Scatter local transpose with gather on shared memory",
+        14: "MPI [M3] Scatter local transpose with final reduction",
+        15: "OMP"
+    }
+
+
     # Loop through each matrix size and plot the time vs. n_threads
     matrix_sizes = df_avg['mPow_size'].unique()
     for matrix_size in matrix_sizes:
         subset = df_avg[df_avg['mPow_size'] == matrix_size]
-        plt.plot(subset['n_threads'], subset['time(s)'], marker='o', linestyle='-',label=f"Matrix Size {matrix_size}")
+        label = labels.get(matrix_size, matrix_size)
+
+        plt.plot(subset['n_threads'], subset['time(s)'], marker='o', linestyle='-',label=label)
         plt.xticks(subset['n_threads'])
 
-    plt.xlabel('Number of Threads (n_threads)')
+    plt.xlabel('Number of Processes/Threads')
 
     plt.ylabel('Time (s)')
     plt.yscale('log')
-    plt.legend()
-    plt.title('[M1]Time vs. Number of Threads for Different Matrix Sizes')
-    plt.legend(title='Matrix Sizes')
+    plt.title('Time vs. N_Threads/Processes Comparison with Matrix size 2^12', fontsize=16)
+    plt.legend(title='Implementations', loc='lower left', prop={'size': 7})
 
     plt.grid(True, which="both", linestyle="--", linewidth=0.5)
-    plt.savefig(f'../data/graphs/omp_comparison1.png')
+    plt.savefig(f'../data/graphs/MPImethods_compare.png')
     plt.show()
 
 
@@ -155,7 +165,7 @@ def plot_mpi_omp_comparison2(mpifile, ompfile):
         subset = df_mpi_avg[df_mpi_avg['n_procs'] == n_proc]
         ax1.plot(subset['mPow_size'], subset['time(s)'], marker='o', linestyle='-', label=f"n_procs {n_proc}")
 
-    ax1.set_title('[M1] Time vs. Matrix Sizes for Different N_Processors (MPI)')
+    ax1.set_title('[M1] Time vs. Matrix Sizes for Different N_Processors (MPI)', fontsize=14)
     ax1.set_ylabel('log Time (s)')
     ax1.set_yscale('log')
     ax1.set_xlabel('Matrix size pow (2^n)')
@@ -170,7 +180,7 @@ def plot_mpi_omp_comparison2(mpifile, ompfile):
         subset = df_omp_avg[df_omp_avg['n_threads'] == n_thread]
         ax2.plot(subset['mPow_size'], subset['time(s)'], marker='o', linestyle='-', label=f"n_threads {n_thread}")
 
-    ax2.set_title('[M1] Time vs. Matrix Sizes for Different N_Threads (OMP)')
+    ax2.set_title('[M1] Time vs. Matrix Sizes for Different N_Threads (OMP)', fontsize=14)
     ax2.set_xlabel('Matrix size pow (2^n)')
     ax2.set_ylabel('log Time (s)')
     ax2.set_yscale('log')
@@ -414,7 +424,7 @@ def plot_mpi_omp_performance_comparisonSTRONG(mpifile, ompfile, seqfile):
 
     plt.xlabel('Number of Processes/Threads')
     plt.ylabel('Speedup')
-    plt.title('[M1]Speedup Comparison for Different Matrix sizes configurations, Strong scaling (avg of 5 runs)')
+    plt.title('[M1]Speedup Comparison for Different Matrix sizes configurations, Strong scaling (avg of 5 runs)', fontsize=14)
     plt.legend(title='Matrix Sizes', loc='upper left', bbox_to_anchor=(0, 1), prop={'size': 9})
     plt.grid(True, which="both", linestyle="--", linewidth=0.5)
     plt.savefig('../data/graphs/mpi_omp_speedup_comparisonSTRONG.png')
@@ -434,19 +444,22 @@ def plot_mpi_omp_performance_comparisonSTRONG(mpifile, ompfile, seqfile):
     plt.xscale('log', base=2)
     plt.ylabel('Efficiency (%)')
     plt.yscale('linear')
-    plt.title('[M1]Efficiency Comparison for Different Matrix sizes configurations, Strong scaling (avg of 5 runs)')
+    plt.title('[M1]Efficiency Comparison for Different Matrix sizes configurations, Strong scaling (avg of 5 runs)', fontsize=14)
     plt.legend(title='Matrix Sizes', loc='upper right', prop={'size': 9})
     plt.grid(True, which="both", linestyle="--", linewidth=0.5)
     plt.savefig('../data/graphs/mpi_omp_efficiency_comparisonSTRONG.png')
     plt.show()
 
-def plot_mpi_omp_performance_comparisonWEAK(mpifile, ompfile):
+def plot_mpi_omp_performance_comparisonWEAK(mpifile, ompfile, seqfile):
     # Read the CSV file directly
     df = pd.read_csv(mpifile, delimiter=';')
     df_avg = df.groupby(['n_procs', 'mPow_size']).agg({'time(s)': 'mean'}).reset_index()
 
     df2 = pd.read_csv(ompfile, delimiter=';')
     df2_avg = df2.groupby(['n_threads', 'mPow_size']).agg({'time(s)': 'mean'}).reset_index()
+
+    df3 =  pd.read_csv(seqfile, delimiter=';')
+    df3_avg = df3.groupby(['mPow_size']).agg({'time(s)': 'mean'}).reset_index()
 
     # Initialize dictionaries to store speedup and efficiency for each matrix size
     speedup_data = {}
@@ -468,9 +481,13 @@ def plot_mpi_omp_performance_comparisonWEAK(mpifile, ompfile):
         subset_time = subset['time(s)']
         subset_threads = subset['n_procs']
 
-        if len(subset_time) > 0 and subset_time.iloc[0] is not np.nan:
+        #SEQ data to get actual best serial time as T0:
+        subset3 = df3_avg[df3_avg['mPow_size'] == msize]
+        subset_time3 = subset3['time(s)']
+
+        if len(subset_time3) > 0 and subset_time3.iloc[0] is not np.nan:
             # Time with a single thread (n_threads = 1)
-            T1 = subset_time.iloc[0] #subset_time2 to utilize T0 from SEQ data
+            T1 = subset_time3.iloc[0] #subset_time2 to utilize T0 from SEQ data
             speedup = [T1 / t for t in subset_time]
             speedup_data[msize] = speedup
 
@@ -488,9 +505,13 @@ def plot_mpi_omp_performance_comparisonWEAK(mpifile, ompfile):
         subset_time2 = subset2['time(s)']
         subset_threads2 = subset2['n_threads']
 
-        if len(subset_time2) > 0 and subset_time2.iloc[0] is not np.nan:
+        #SEQ data to get actual best serial time as T0:
+        subset3 = df3_avg[df3_avg['mPow_size'] == msize]
+        subset_time3 = subset3['time(s)']
+
+        if len(subset_time3) > 0 and subset_time3.iloc[0] is not np.nan:
             # Time with a single thread (n_threads = 1)
-            T1 = subset_time2.iloc[0] #subset_time2 to utilize T0 from SEQ data
+            T1 = subset_time3.iloc[0] #subset_time2 to utilize T0 from SEQ data
             # T1_O = subset_time2.iloc[0]  #USE T1 from the openmp 1 thread as base timing
             speedup2 = [T1 / t for t in subset_time2]
             speedup_data2[msize2] = speedup2
@@ -648,7 +669,7 @@ def plot_mpi_comparison1BAR(filename):
 
 
 def main():
-    # plot_omp_comparison1(ompWEAK_csvfile)
+    plot_omp_comparison1(comparemethods)
     # plot_omp_comparison2(omp_csvfile)
     # plot_omp_performance_comparison(omp_csvfile)
     # plot_seq_imp_performance(*process_csv(seq_csvfile))
@@ -657,9 +678,9 @@ def main():
     # plot_imp_optimizations()
     # plot_mpi_comparison1(mpi_csvfile)
     # plot_mpi_comparison1BAR(mpi_csvfile)
-    plot_mpi_omp_comparison2(mpi_csvfile, omp_csvfile)
+    # plot_mpi_omp_comparison2(mpi_csvfile, omp_csvfile)
     # plot_mpi_performance_comparison(mpiSTRONG_csvfile)
-    plot_mpi_omp_performance_comparisonSTRONG(mpiSTRONG_csvfile, ompSTRONG_csvfile, seqSTRONG_csvfile)
-    plot_mpi_omp_performance_comparisonWEAK(mpiWEAK_csvfile, ompWEAK_csvfile)
+    # plot_mpi_omp_performance_comparisonSTRONG(mpiSTRONG_csvfile, ompSTRONG_csvfile, seqSTRONG_csvfile)
+    # plot_mpi_omp_performance_comparisonWEAK(mpiWEAK_csvfile, ompWEAK_csvfile, seqWEAK_csvfile)
 if __name__ == "__main__":
     main()

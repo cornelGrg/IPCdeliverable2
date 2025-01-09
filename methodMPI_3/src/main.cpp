@@ -5,7 +5,7 @@
 #include <mpi.h>
 #include <iostream>
 
-//In-Place transposition algorithm with MPI local transpose and gather approach
+//Out-of-Place transposition algorithm with MPI with scatter local transpose and final reduction approach
 int main(int argc, char** argv) {
     MPI_Init(&argc, &argv);
 
@@ -150,13 +150,13 @@ int main(int argc, char** argv) {
 
             //Broadcast complete matrix to all ranks to check sym and compute transpose
             //Check symmetry for this method is disabled for testing purposes
-//            MPI_Bcast(M_flat.data(), size*size, MPI_FLOAT, 0, MPI_COMM_WORLD);
-//            int_bool_flag = checkSymMPI(M_flat, size, mpi_rank, mpi_size);
-//
-//            MPI_Allreduce(&int_bool_flag, &global_bool_flag, 1, MPI_INT, MPI_PROD, MPI_COMM_WORLD);
-//            isSym = global_bool_flag;
+            MPI_Bcast(M_flat.data(), size*size, MPI_FLOAT, 0, MPI_COMM_WORLD);
+            int_bool_flag = checkSymMPI(M_flat, size, mpi_rank, mpi_size);
 
-            if (true) {
+            MPI_Allreduce(&int_bool_flag, &global_bool_flag, 1, MPI_INT, MPI_PROD, MPI_COMM_WORLD);
+            isSym = global_bool_flag;
+
+            if (!isSym) {
                 for (int i = 0; i < 5; ++i) {
 
                     MPI_Barrier(MPI_COMM_WORLD);

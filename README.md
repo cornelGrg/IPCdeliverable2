@@ -21,9 +21,9 @@ The main project is written in C++ while the plotter program is written in Pytho
 
 Start by downloading the repository, where you can find multiple *methodMPI_X* folders, each folder contains a different approach that was tested during the making of the report, every algorithm has the same exact folder structure and the instructions below apply to all of them.
 
-- methodMPI_1: Naive per row divided and gather approach
-- methodMPI_2: Naive local transpose with gather on shared memory
-- methodMPI_3: Naive local transpose with final reduction
+- methodMPI_1: Naive Out-of-Place per row divided and gather approach
+- methodMPI_2: Naive Out-of-Place scatter local transpose with gather on shared memory
+- methodMPI_3: Naive Out-of-Place scatter local transpose with final reduction
 
 For the best performance overall and the actual method deemed succesfull run *methodMPI_1*. 
 You can find already generated graphs for methodMPI_1 inside the graph folder `/methodMPI_1/data/graphs/` to see the performance analyzed in the report.
@@ -42,7 +42,7 @@ IPCdeliverable2/
 │   ├── include
 │   ├── python
 │   └── src
-├── methodMPI_2 #Naive local transpose with gather on shared memory
+├── methodMPI_2 #Naive scatter local transpose with gather on shared memory
 │   ├── build
 │   ├── data
 │   │   ├── csv
@@ -52,7 +52,7 @@ IPCdeliverable2/
 │   ├── include
 │   ├── python
 │   └── src
-├── methodMPI_3 #Naive local transpose with final reduction
+├── methodMPI_3 #Naive scatter local transpose with final reduction
 │   ├── build
 │   ├── data
 │   │   ├── csv
@@ -84,7 +84,7 @@ The pbs outputs will be saved inside the `/IPCDeliverable2/pbsOutputs/` folder a
 #### Interactive Session: 
 1. Connect via ssh to the cluster: ` ssh username@hpc.unitn.it `
 2. Upload the project folder to your personal directory on the cluster
-3. Start an interactive session: `qsub -I -q short_cpuQ -l select=1:ncpus=64:mpiprocs=64:mem=256mb ` (all tests were conducted using 96 threads in the short_cpuQ queue)
+3. Start an interactive session: `qsub -I -q short_cpuQ -l select=1:ncpus=64:mpiprocs=64:mem=256mb `
 4. Go to the `/IPCDeliverable2/methodMPI_1/src/` folder
 5. Run `chmod +x compileMPI.sh` and then run `chmod +x runTestsMPI.sh`  to make the scripts executable
 6. Run `./compileMPI.sh` to compile the complete code
