@@ -158,20 +158,24 @@ int main(int argc, char** argv) {
 
             if (!isSym) {
                 for (int i = 0; i < 5; ++i) {
+                    MPI_Scatter(M_flat.data(), rowsPerProcess * size, MPI_FLOAT, localMatrix.data(), rowsPerProcess * size, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
+                    //ONLY measure the computation
                     MPI_Barrier(MPI_COMM_WORLD);
                     if (mpi_rank == 0) {
                         executions++;
                         wt1 = omp_get_wtime();
                     }
 
-                    MPI_Scatter(M_flat.data(), rowsPerProcess * size, MPI_FLOAT, localMatrix.data(), rowsPerProcess * size, MPI_FLOAT, 0, MPI_COMM_WORLD);
                     matTransposeMPI(localMatrix ,T_flat ,size ,mpi_rank ,mpi_size);
-                    MPI_Reduce(T_flat.data(), global_vector.data(), size*size, MPI_FLOAT, MPI_SUM, 0, MPI_COMM_WORLD);
 
                     MPI_Barrier(MPI_COMM_WORLD);
                     if (mpi_rank == 0) {
                         wt2 = omp_get_wtime();
+                    }
+
+                    MPI_Reduce(T_flat.data(), global_vector.data(), size*size, MPI_FLOAT, MPI_SUM, 0, MPI_COMM_WORLD);
+                    if (mpi_rank == 0) {
                         T = deflatten(global_vector, size);
 
                         if (!checkTrans(M, T)) {

@@ -58,7 +58,8 @@ int main(int argc, char** argv) {
             if (mpi_rank == 0) {
                 M = matInit(size, 3);
                 isSym = checkSymSEQ(M, size);
-
+                std::vector <float> M_flatSEQ = flatten(M);
+                std::vector <float> T_flatSEQ(size * size);
                 std::cout << std::endl << "------------------------------------------" << std::endl;
                 std::cout << "Matrix size: " << m_size << std::endl;
 
@@ -73,6 +74,7 @@ int main(int argc, char** argv) {
                             wt1 = omp_get_wtime();
                             matTransposeSEQ(M, T, size);
                             wt2 = omp_get_wtime();
+
 
                             if (!checkTrans(M, T))
                                 std::cout << "Error: matrix not transposed properly! (SEQUENTIAL)" << std::endl;
@@ -149,19 +151,35 @@ int main(int argc, char** argv) {
             isSym = global_bool_flag;
 
             if (!isSym) {
+                int rows_per_process = size / mpi_size;
+                int rows_reminder = size % mpi_size;
+
+                int start_row = mpi_rank * rows_per_process + std::min(mpi_rank, rows_reminder);
+                int end_row = start_row + rows_per_process + (mpi_rank < rows_reminder);
+                int local_rows = end_row - start_row;
+
                 for (int i = 0; i < 5; ++i) {
 
+                    std::vector<float> local_trans(local_rows * size);
+
+                    //ONLY measure the computation, not the data scattering and gathering
                     MPI_Barrier(MPI_COMM_WORLD);
                     if (mpi_rank == 0) {
                         executions++;
                         wt1 = omp_get_wtime();
                     }
 
-                    matTransposeMPI(M_flat, T_flat, size, mpi_rank, mpi_size);
+                    matTransposeMPI(M_flat, local_trans, size, start_row, end_row);
 
                     MPI_Barrier(MPI_COMM_WORLD);
                     if (mpi_rank == 0) {
                         wt2 = omp_get_wtime();
+                    }
+                    //Gather partial results on rank 0
+                    MPI_Gather(
+                            local_trans.data(), local_rows * size, MPI_FLOAT, T_flat.data(), local_rows * size, MPI_FLOAT, 0, MPI_COMM_WORLD
+                    );
+                    if(mpi_rank == 0){
                         T = deflatten(T_flat, size);
 
                         if (!checkTrans(M, T)) {

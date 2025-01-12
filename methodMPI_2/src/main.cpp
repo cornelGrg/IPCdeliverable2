@@ -150,18 +150,41 @@ int main(int argc, char** argv) {
 
             if (!isSym) {
                 for (int i = 0; i < 5; ++i) {
+                    //scatter data
+                    int rowsPerProcess = size / mpi_size;
+                    std::vector<float> localBlock(rowsPerProcess * size);
+                    MPI_Scatter(M_flat.data(), rowsPerProcess * size, MPI_FLOAT, localBlock.data(), rowsPerProcess * size, MPI_FLOAT, 0, MPI_COMM_WORLD);
 
+                    //allocate shared window
+                    MPI_Win win;
+                    float* TransposedMatrix = nullptr;
+
+                    if (mpi_rank == 0) {
+                        MPI_Win_allocate(size * size * sizeof(float), sizeof(float), MPI_INFO_NULL, MPI_COMM_WORLD, &TransposedMatrix, &win);
+                    } else {
+                        MPI_Win_allocate(0, sizeof(float), MPI_INFO_NULL, MPI_COMM_WORLD, &TransposedMatrix, &win);
+                    }
+
+                    //ONLY measure the computation
                     MPI_Barrier(MPI_COMM_WORLD);
                     if (mpi_rank == 0) {
                         executions++;
                         wt1 = omp_get_wtime();
                     }
 
-                    matTransposeMPI(M_flat, T_flat, size, mpi_rank, mpi_size);
+                    matTransposeMPI(localBlock, size, mpi_rank, win, rowsPerProcess);
 
                     MPI_Barrier(MPI_COMM_WORLD);
                     if (mpi_rank == 0) {
                         wt2 = omp_get_wtime();
+                    }
+
+                    if (mpi_rank == 0) {
+                        T_flat = std::vector<float>(TransposedMatrix, TransposedMatrix + size * size);
+                    }
+                    MPI_Win_free(&win);
+
+                    if (mpi_rank == 0) {
                         T = deflatten(T_flat, size);
 
                         if (!checkTrans(M, T)) {

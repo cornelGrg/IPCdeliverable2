@@ -17,4 +17,3 @@ void matTransposeSEQ(const std::vector<std::vector<float>>& mat, std::vector<std
         }
     }
 }
-

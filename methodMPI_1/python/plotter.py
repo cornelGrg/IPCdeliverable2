@@ -415,7 +415,7 @@ def plot_mpi_omp_performance_comparisonSTRONG(mpifile, ompfile, seqfile):
     # plt.plot(subset_threads, subset_threads, linestyle='--', color = 'black', label=f"Ideal speedup")
 
     #Plot Speedup vs NThreads for all matrix sizes
-    for msize, color in zip(speedup_data, ['#FF6347', '#E34234', '#A52A2A']):
+    for msize, color in zip(speedup_data, ['#FF6347', '#FBC02D', '#A52A2A']):
         plt.plot(subset_threads, speedup_data[msize], marker='o', linestyle='-', color=color, label=f"Matrix Size 2^{msize} [MPI]")
         plt.xticks(subset_threads)
 
@@ -432,7 +432,7 @@ def plot_mpi_omp_performance_comparisonSTRONG(mpifile, ompfile, seqfile):
 
     # Plot Efficiency vs NThreads for all matrix sizes
     plt.figure(figsize=(10, 6))
-    for msize, color in zip(efficiency_data, ['#FF6347', '#E34234', '#A52A2A']):
+    for msize, color in zip(efficiency_data, ['#FF6347', '#FBC02D', '#A52A2A']):
         plt.plot(subset_threads, efficiency_data[msize], marker='o', linestyle='-', color=color, label=f"Matrix Size 2^{msize} [MPI]")
         plt.xticks(subset_threads)
 
@@ -667,6 +667,91 @@ def plot_mpi_comparison1BAR(filename):
     plt.savefig(f'../data/graphs/mpi_comparison1_bar.png')
     plt.show()
 
+def plot_mpi_omp_bandwidth(seqfile, mpifile, ompfile):
+    # Read and preprocess the data
+    df_seq = pd.read_csv(seqfile, delimiter=';')
+    df_seq_avg = df_seq.groupby(['mPow_size']).agg({'time(s)': 'mean'}).reset_index()
+
+    df_mpi = pd.read_csv(mpifile, delimiter=';')
+    df_mpi_avg = df_mpi.groupby(['n_procs', 'mPow_size']).agg({'time(s)': 'mean'}).reset_index()
+
+    df_omp = pd.read_csv(ompfile, delimiter=';')
+    df_omp_avg = df_omp.groupby(['n_threads', 'mPow_size']).agg({'time(s)': 'mean'}).reset_index()
+
+    # Define a helper function to calculate bandwidth
+    def calculate_bandwidth(matrix_size_pow2, time_s):
+        matrix_size = 2 ** matrix_size_pow2  # Compute size of one side
+        total_elements = matrix_size ** 2   # Total number of elements
+        data_moved = 2 * total_elements * 4  # Bytes (2 for read/write, 4 bytes for float)
+        data_moved_gb = data_moved / (1024 ** 3)  # Convert to GB
+        return data_moved_gb / time_s  # Bandwidth in GB/s
+
+    # Calculate bandwidth for sequential
+    df_seq_avg['bandwidth(GB/s)'] = df_seq_avg.apply(
+        lambda row: calculate_bandwidth(row['mPow_size'], row['time(s)']),
+        axis=1
+    )
+
+    # Calculate bandwidth for MPI
+    df_mpi_avg['bandwidth(GB/s)'] = df_mpi_avg.apply(
+        lambda row: calculate_bandwidth(row['mPow_size'], row['time(s)']),
+        axis=1
+    )
+
+    # Calculate bandwidth for OpenMP
+    df_omp_avg['bandwidth(GB/s)'] = df_omp_avg.apply(
+        lambda row: calculate_bandwidth(row['mPow_size'], row['time(s)']),
+        axis=1
+    )
+
+    # Create the plots
+    plt.figure(figsize=(12, 10))
+
+    # Plot Sequential Bandwidth
+    plt.subplot(3, 1, 1)
+    plt.plot(
+        df_seq_avg['mPow_size'], df_seq_avg['bandwidth(GB/s)'],
+        marker='o', label="Sequential", color='blue'
+    )
+    plt.title('Sequential Bandwidth', fontsize=14)
+    plt.xlabel('Matrix size (2^n)')
+    plt.ylabel('Bandwidth (GB/s)')
+    plt.grid(True, linestyle="--", linewidth=0.5)
+    plt.legend()
+
+    # Plot MPI Bandwidth
+    plt.subplot(3, 1, 2)
+    for n_procs in df_mpi_avg['n_procs'].unique():
+        subset = df_mpi_avg[df_mpi_avg['n_procs'] == n_procs]
+        plt.plot(
+            subset['mPow_size'], subset['bandwidth(GB/s)'],
+            marker='o', label=f"MPI {n_procs} procs"
+        )
+    plt.title('MPI Bandwidth', fontsize=14)
+    plt.xlabel('Matrix size (2^n)')
+    plt.ylabel('Bandwidth (GB/s)')
+    plt.grid(True, linestyle="--", linewidth=0.5)
+    plt.legend()
+
+    # Plot OpenMP Bandwidth
+    plt.subplot(3, 1, 3)
+    for n_threads in df_omp_avg['n_threads'].unique():
+        subset = df_omp_avg[df_omp_avg['n_threads'] == n_threads]
+        plt.plot(
+            subset['mPow_size'], subset['bandwidth(GB/s)'],
+            marker='o', label=f"OpenMP {n_threads} threads"
+        )
+    plt.title('OpenMP Bandwidth', fontsize=14)
+    plt.xlabel('Matrix size (2^n)')
+    plt.ylabel('Bandwidth (GB/s)')
+    plt.grid(True, linestyle="--", linewidth=0.5)
+    plt.legend()
+
+    # Save the figure to a PNG file
+    plt.tight_layout()
+    plt.savefig('../data/graphs/mpi_omp_bandwidth.png')
+    plt.show()
+
 
 def main():
     plot_omp_comparison1(comparemethods)
@@ -680,7 +765,8 @@ def main():
     # plot_mpi_comparison1BAR(mpi_csvfile)
     # plot_mpi_omp_comparison2(mpi_csvfile, omp_csvfile)
     # plot_mpi_performance_comparison(mpiSTRONG_csvfile)
-    # plot_mpi_omp_performance_comparisonSTRONG(mpiSTRONG_csvfile, ompSTRONG_csvfile, seqSTRONG_csvfile)
+    plot_mpi_omp_performance_comparisonSTRONG(mpiSTRONG_csvfile, ompSTRONG_csvfile, seqSTRONG_csvfile)
     # plot_mpi_omp_performance_comparisonWEAK(mpiWEAK_csvfile, ompWEAK_csvfile, seqWEAK_csvfile)
+    # plot_mpi_omp_bandwidth(seq_csvfile, mpi_csvfile, omp_csvfile)
 if __name__ == "__main__":
     main()

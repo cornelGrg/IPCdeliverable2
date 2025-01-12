@@ -20,22 +20,7 @@ int checkSymMPI(const std::vector<float>& mat, int n, int mpi_rank, int mpi_size
     return 1;
 }
 
-void matTransposeMPI(const std::vector<float>& mat, std::vector<float>& trans, int n, int mpi_rank, int mpi_size){
-    int rowsPerProcess = n / mpi_size;
-    
-    std::vector<float> localBlock(rowsPerProcess * n);
-
-    MPI_Scatter(mat.data(), rowsPerProcess * n, MPI_FLOAT, localBlock.data(), rowsPerProcess * n, MPI_FLOAT, 0, MPI_COMM_WORLD);
-
-    MPI_Win win;
-    float* TransposedMatrix = nullptr;
-
-    if (mpi_rank == 0) {
-        MPI_Win_allocate(n * n * sizeof(float), sizeof(float), MPI_INFO_NULL, MPI_COMM_WORLD, &TransposedMatrix, &win);
-    } else {
-        MPI_Win_allocate(0, sizeof(float), MPI_INFO_NULL, MPI_COMM_WORLD, &TransposedMatrix, &win);
-    }
-
+void matTransposeMPI(std::vector<float>& localBlock,  int n, int mpi_rank, MPI_Win win, int rowsPerProcess){
     MPI_Win_fence(0, win);
 
     for (int i = 0; i < rowsPerProcess; ++i) {
@@ -49,12 +34,6 @@ void matTransposeMPI(const std::vector<float>& mat, std::vector<float>& trans, i
     }
 
     MPI_Win_fence(0, win);
-
-    if (mpi_rank == 0) {
-        trans = std::vector<float>(TransposedMatrix, TransposedMatrix + n * n);
-    }
-
-    MPI_Win_free(&win);
 }
 
 
