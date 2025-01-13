@@ -36,6 +36,7 @@ rm ../data/csv/SEQtime.csv
 mpirun -np 1 ./matTrans
 echo
 echo "-----------------------------------------"
+echo
 
 rm ../data/csv/MPItime.csv
 

@@ -1,3 +1,4 @@
+rm ../data/csv/SEQtime.csv
 rm ../data/csv/OMPtime.csv
 mpirun -np 1 ./matTrans
 

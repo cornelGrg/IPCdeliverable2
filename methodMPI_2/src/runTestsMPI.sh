@@ -1,3 +1,6 @@
+rm ../data/csv/OMPtime.csv
+mpirun -np 1 ./matTrans
+
 rm ../data/csv/MPItime.csv
 
 mpirun -np 1 ./matTrans -mpi

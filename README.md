@@ -16,6 +16,7 @@ The assignment consists of benchmarking and studying the effects of different pa
 
 ## Reproducibility
 All the tests were done using the University's cluster with _MPICH version 3.2.1 based on GCC 9.1.0_.
+For MPICH on the university cluster I used the module _mpich-3.2.1--gcc-9.1.0_ which get's automatically loaded by the PBS scripts and the manual `compileMPI.sh` script
 
 The main project is written in C++ while the plotter program is written in Python.
 
@@ -25,7 +26,7 @@ Start by downloading the repository, where you can find multiple *methodMPI_X* f
 - methodMPI_2: Naive Out-of-Place scatter local transpose with gather on shared memory
 - methodMPI_3: Naive Out-of-Place scatter local transpose with final reduction
 
-For the best performance overall and the actual method deemed succesfull run *methodMPI_1*. 
+For the best performance overall run *methodMPI_1*. 
 You can find already generated graphs for methodMPI_1 inside the graph folder `/methodMPI_1/data/graphs/` to see the performance analyzed in the report.
 
 ### Directory structure
@@ -93,7 +94,7 @@ The data will be printed on the console but it will also be saved in the `/IPCDe
 
 
 #### Manual execution:
-The program can also be run manually with a single matrix size specifying size, to do so run `mpirun -np X ./matTrans Y` where X is the number of processes for MPI (usually also chosen as a power of two between 1/2/4/8/16/32/64) and Y is the size of the matrix (expressed as a power of 2, default=4)
+The program can also be run manually (without any script) with a single matrix size specifying size, to do so run `mpirun -np X ./matTrans Y` where X is the number of processes for MPI (usually also chosen as a power of two between 1/2/4/8/16/32/64) and Y is the size of the matrix (expressed as a power of 2, default=4)
 
 An optional `-mpi` flag can be used to only execute the MPI implementation (by default all the SEQ, OMP and MPI implementations are executed)
 
