@@ -1,192 +1,192 @@
 Architecture:          x86_64
 CPU op-mode(s):        32-bit, 64-bit
 Byte Order:            Little Endian
-CPU(s):                72
-On-line CPU(s) list:   0-71
+CPU(s):                96
+On-line CPU(s) list:   0-95
 Thread(s) per core:    1
-Core(s) per socket:    18
+Core(s) per socket:    24
 Socket(s):             4
 NUMA node(s):          4
 Vendor ID:             GenuineIntel
 CPU family:            6
 Model:                 85
-Model name:            Intel(R) Xeon(R) Gold 6140M CPU @ 2.30GHz
-Stepping:              4
+Model name:            Intel(R) Xeon(R) Gold 6252N CPU @ 2.30GHz
+Stepping:              7
 CPU MHz:               2300.000
 BogoMIPS:              4600.00
 Virtualization:        VT-x
 L1d cache:             32K
 L1i cache:             32K
 L2 cache:              1024K
-L3 cache:              25344K
-NUMA node0 CPU(s):     0-17
-NUMA node1 CPU(s):     18-35
-NUMA node2 CPU(s):     36-53
-NUMA node3 CPU(s):     54-71
-Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch epb cat_l3 cdp_l3 invpcid_single intel_ppin intel_pt ssbd mba ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm cqm mpx rdt_a avx512f avx512dq rdseed adx smap clflushopt clwb avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local dtherm ida arat pln pts pku ospke md_clear spec_ctrl intel_stibp flush_l1d
+L3 cache:              36608K
+NUMA node0 CPU(s):     0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,92
+NUMA node1 CPU(s):     1,5,9,13,17,21,25,29,33,37,41,45,49,53,57,61,65,69,73,77,81,85,89,93
+NUMA node2 CPU(s):     2,6,10,14,18,22,26,30,34,38,42,46,50,54,58,62,66,70,74,78,82,86,90,94
+NUMA node3 CPU(s):     3,7,11,15,19,23,27,31,35,39,43,47,51,55,59,63,67,71,75,79,83,87,91,95
+Flags:                 fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc aperfmperf eagerfpu pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid dca sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch epb cat_l3 cdp_l3 invpcid_single intel_ppin ssbd mba rsb_ctxsw ibrs ibpb stibp ibrs_enhanced tpr_shadow vnmi flexpriority ept vpid fsgsbase tsc_adjust bmi1 hle avx2 smep bmi2 erms invpcid rtm cqm mpx rdt_a avx512f avx512dq rdseed adx smap clflushopt clwb intel_pt avx512cd avx512bw avx512vl xsaveopt xsavec xgetbv1 cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local dtherm ida arat pln pts pku ospke avx512_vnni md_clear spec_ctrl intel_stibp flush_l1d arch_capabilities
 
 
 ------------------------------------------
 Matrix size: 4
-Sequential: wall clock time (avg of 5) = 6.95437e-06 sec
+Sequential: wall clock time (avg of 5) = 7.45431e-06 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  1.1459e-05	        (avg of 5)
-2	  1.37061e-05	        (avg of 5)
-4	  1.28239e-05	        (avg of 5)
-8	  1.35452e-05	        (avg of 5)
-16	  0.000139646	        (avg of 5)
-32	  6.28844e-05	        (avg of 5)
-64	  2.60517e-05	        (avg of 5)
+1	  1.07743e-05	        (avg of 5)
+2	  2.08907e-05	        (avg of 5)
+4	  2.63229e-05	        (avg of 5)
+8	  2.47955e-05	        (avg of 5)
+16	  2.59221e-05	        (avg of 5)
+32	  2.96801e-05	        (avg of 5)
+64	  5.00686e-05	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  7.5981e-06	        (avg of 5)
+1	  4.79221e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 5
-Sequential: wall clock time (avg of 5) = 9.80198e-06 sec
+Sequential: wall clock time (avg of 5) = 2.95155e-05 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  1.1237e-05	        (avg of 5)
-2	  5.85482e-05	        (avg of 5)
-4	  3.4073e-05	        (avg of 5)
-8	  3.29092e-05	        (avg of 5)
-16	  2.83271e-05	        (avg of 5)
-32	  2.86222e-05	        (avg of 5)
-64	  0.0001203	        (avg of 5)
+1	  3.34568e-05	        (avg of 5)
+2	  5.7184e-05	        (avg of 5)
+4	  6.87301e-05	        (avg of 5)
+8	  5.27076e-05	        (avg of 5)
+16	  4.5561e-05	        (avg of 5)
+32	  4.15251e-05	        (avg of 5)
+64	  4.48652e-05	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  9.19849e-06	        (avg of 5)
+1	  1.9069e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 6
-Sequential: wall clock time (avg of 5) = 3.80561e-05 sec
+Sequential: wall clock time (avg of 5) = 0.000116102 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  5.9177e-05	        (avg of 5)
-2	  7.92399e-05	        (avg of 5)
-4	  7.04736e-05	        (avg of 5)
-8	  7.58693e-05	        (avg of 5)
-16	  7.91833e-05	        (avg of 5)
-32	  5.72413e-05	        (avg of 5)
-64	  5.90235e-05	        (avg of 5)
+1	  0.000120293	        (avg of 5)
+2	  0.000121215	        (avg of 5)
+4	  0.000124312	        (avg of 5)
+8	  0.000114794	        (avg of 5)
+16	  0.000104944	        (avg of 5)
+32	  8.17582e-05	        (avg of 5)
+64	  7.98419e-05	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  2.65688e-05	        (avg of 5)
+1	  7.2173e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 7
-Sequential: wall clock time (avg of 5) = 0.000156932 sec
+Sequential: wall clock time (avg of 5) = 0.000340039 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  0.000265555	        (avg of 5)
-2	  0.000191851	        (avg of 5)
-4	  0.000143969	        (avg of 5)
-8	  0.00015192	        (avg of 5)
-16	  0.000116237	        (avg of 5)
-32	  0.000104198	        (avg of 5)
-64	  8.46073e-05	        (avg of 5)
+1	  0.000450072	        (avg of 5)
+2	  0.000332542	        (avg of 5)
+4	  0.000281193	        (avg of 5)
+8	  0.000222834	        (avg of 5)
+16	  0.000160377	        (avg of 5)
+32	  0.000120822	        (avg of 5)
+64	  0.000122914	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.00010661	        (avg of 5)
+1	  0.000233514	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 8
-Sequential: wall clock time (avg of 5) = 0.000671288 sec
+Sequential: wall clock time (avg of 5) = 0.000976063 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  0.000754967	        (avg of 5)
-2	  0.000851683	        (avg of 5)
-4	  0.000361362	        (avg of 5)
-8	  0.000181311	        (avg of 5)
-16	  0.000171368	        (avg of 5)
-32	  0.000138843	        (avg of 5)
-64	  0.000109145	        (avg of 5)
+1	  0.00134358	        (avg of 5)
+2	  0.00085692	        (avg of 5)
+4	  0.000650179	        (avg of 5)
+8	  0.000389124	        (avg of 5)
+16	  0.000225998	        (avg of 5)
+32	  0.000195413	        (avg of 5)
+64	  0.000141072	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.00043481	        (avg of 5)
+1	  0.000476096	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 9
-Sequential: wall clock time (avg of 5) = 0.00234776 sec
+Sequential: wall clock time (avg of 5) = 0.00268509 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  0.00251801	        (avg of 5)
-2	  0.00271698	        (avg of 5)
-4	  0.00143792	        (avg of 5)
-8	  0.000753978	        (avg of 5)
-16	  0.00040901	        (avg of 5)
-32	  0.000382859	        (avg of 5)
-64	  0.000359291	        (avg of 5)
+1	  0.00287765	        (avg of 5)
+2	  0.00256557	        (avg of 5)
+4	  0.00206699	        (avg of 5)
+8	  0.00121368	        (avg of 5)
+16	  0.000707414	        (avg of 5)
+32	  0.000565462	        (avg of 5)
+64	  0.000437827	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.00276305	        (avg of 5)
+1	  0.00279229	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 10
-Sequential: wall clock time (avg of 5) = 0.00963002 sec
+Sequential: wall clock time (avg of 5) = 0.00974445 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  0.00964134	        (avg of 5)
-2	  0.0102415	        (avg of 5)
-4	  0.0055376	        (avg of 5)
-8	  0.00292012	        (avg of 5)
-16	  0.00155108	        (avg of 5)
-32	  0.000870734	        (avg of 5)
-64	  0.000894527	        (avg of 5)
+1	  0.0110323	        (avg of 5)
+2	  0.00875161	        (avg of 5)
+4	  0.00495496	        (avg of 5)
+8	  0.00320196	        (avg of 5)
+16	  0.00185523	        (avg of 5)
+32	  0.00121359	        (avg of 5)
+64	  0.000949293	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.0133311	        (avg of 5)
+1	  0.0125931	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 11
-Sequential: wall clock time (avg of 5) = 0.0550994 sec
+Sequential: wall clock time (avg of 5) = 0.0577128 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  0.0521558	        (avg of 5)
-2	  0.0441809	        (avg of 5)
-4	  0.0240002	        (avg of 5)
-8	  0.0124306	        (avg of 5)
-16	  0.00638437	        (avg of 5)
-32	  0.00346404	        (avg of 5)
-64	  0.00221599	        (avg of 5)
+1	  0.0593162	        (avg of 5)
+2	  0.0476048	        (avg of 5)
+4	  0.0286342	        (avg of 5)
+8	  0.015337	        (avg of 5)
+16	  0.00969168	        (avg of 5)
+32	  0.00528702	        (avg of 5)
+64	  0.00323735	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.0664941	        (avg of 5)
+1	  0.0502996	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 12
-Sequential: wall clock time (avg of 5) = 0.251199 sec
+Sequential: wall clock time (avg of 5) = 0.268446 sec
 
 OpenMP:
 N_threads|wall_clock_time (avg)|n_of_executions
-1	  0.247297	        (avg of 5)
-2	  0.165818	        (avg of 5)
-4	  0.0870241	        (avg of 5)
-8	  0.044798	        (avg of 5)
-16	  0.0279984	        (avg of 5)
-32	  0.0131879	        (avg of 5)
-64	  0.0116568	        (avg of 5)
+1	  0.266701	        (avg of 5)
+2	  0.195627	        (avg of 5)
+4	  0.107	        (avg of 5)
+8	  0.0595573	        (avg of 5)
+16	  0.0332116	        (avg of 5)
+32	  0.0201554	        (avg of 5)
+64	  0.0126413	        (avg of 5)
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.712138	        (avg of 5)
+1	  0.545354	        (avg of 5)
 
 -----------------------------------------
 
@@ -196,315 +196,315 @@ Matrix size: 4
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  1.12206e-05	        (avg of 5)
+1	  4.34816e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 5
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  3.05787e-05	        (avg of 5)
+1	  1.69896e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 6
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  7.14019e-05	        (avg of 5)
+1	  5.58056e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 7
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.000265852	        (avg of 5)
+1	  0.000243613	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 8
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.000675523	        (avg of 5)
+1	  0.000581805	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 9
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.00271818	        (avg of 5)
+1	  0.00288267	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 10
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.0136236	        (avg of 5)
+1	  0.0118503	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 11
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.0705585	        (avg of 5)
+1	  0.0494637	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 12
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-1	  0.827277	        (avg of 5)
+1	  0.542103	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 4
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  1.46911e-05	        (avg of 5)
+2	  4.56125e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 5
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  1.06812e-05	        (avg of 5)
+2	  1.15097e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 6
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  3.113e-05	        (avg of 5)
+2	  3.83414e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 7
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  9.93431e-05	        (avg of 5)
+2	  0.000134344	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 8
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  0.000481886	        (avg of 5)
+2	  0.000412715	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 9
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  0.00231165	        (avg of 5)
+2	  0.00144925	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 10
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  0.0136273	        (avg of 5)
+2	  0.00672749	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 11
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  0.0779169	        (avg of 5)
+2	  0.0294379	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 12
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-2	  0.650955	        (avg of 5)
+2	  0.280256	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 4
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  1.91495e-05	        (avg of 5)
+4	  9.20445e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 5
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  1.84849e-05	        (avg of 5)
+4	  8.84682e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 6
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  4.31776e-05	        (avg of 5)
+4	  2.31363e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 7
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  0.000129436	        (avg of 5)
+4	  7.47964e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 8
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  0.000620644	        (avg of 5)
+4	  0.000197822	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 9
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  0.00260946	        (avg of 5)
+4	  0.000846334	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 10
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  0.012365	        (avg of 5)
+4	  0.00367478	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 11
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  0.0821575	        (avg of 5)
+4	  0.0178875	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 12
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-4	  0.439501	        (avg of 5)
+4	  0.144117	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 4
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  3.17574e-05	        (avg of 5)
+8	  7.24569e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 5
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  3.05191e-05	        (avg of 5)
+8	  7.23526e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 6
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  5.28723e-05	        (avg of 5)
+8	  8.43629e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 7
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  0.000151587	        (avg of 5)
+8	  1.69024e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 8
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  0.000718753	        (avg of 5)
+8	  5.44719e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 9
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  0.00279951	        (avg of 5)
+8	  0.00034095	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 10
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  0.0132326	        (avg of 5)
+8	  0.00329696	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 11
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  0.0673319	        (avg of 5)
+8	  0.0108684	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 12
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-8	  0.295864	        (avg of 5)
+8	  0.0911359	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 4
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  4.37602e-05	        (avg of 5)
+16	  1.14895e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 5
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  3.11166e-05	        (avg of 5)
+16	  7.55116e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 6
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  5.97715e-05	        (avg of 5)
+16	  1.01157e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 7
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  0.000161807	        (avg of 5)
+16	  1.40287e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 8
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  0.000777958	        (avg of 5)
+16	  3.13833e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 9
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  0.00296267	        (avg of 5)
+16	  0.000217543	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 10
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  0.0134237	        (avg of 5)
+16	  0.0016935	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 11
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  0.0612625	        (avg of 5)
+16	  0.00700624	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 12
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-16	  0.26347	        (avg of 5)
+16	  0.0464112	        (avg of 5)
 
 Size of matrix(256) is not divisible by number of procs(32)
 
@@ -513,56 +513,56 @@ Matrix size: 5
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-32	  8.02293e-05	        (avg of 5)
+32	  1.29469e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 6
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-32	  7.67693e-05	        (avg of 5)
+32	  8.30442e-06	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 7
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-32	  0.000222321	        (avg of 5)
+32	  1.03079e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 8
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-32	  0.000882058	        (avg of 5)
+32	  2.26296e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 9
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-32	  0.00334028	        (avg of 5)
+32	  0.000122408	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 10
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-32	  0.0157675	        (avg of 5)
+32	  0.00105795	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 11
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-32	  0.0678818	        (avg of 5)
+32	  0.00443311	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 12
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-32	  0.30557	        (avg of 5)
+32	  0.0269276	        (avg of 5)
 
 Size of matrix(256) is not divisible by number of procs(64)
 
@@ -573,46 +573,46 @@ Matrix size: 6
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-64	  0.000205268	        (avg of 5)
+64	  1.50658e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 7
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-64	  0.00036253	        (avg of 5)
+64	  1.10559e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 8
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-64	  0.00126453	        (avg of 5)
+64	  1.84104e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 9
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-64	  0.00563176	        (avg of 5)
+64	  9.4945e-05	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 10
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-64	  0.0262592	        (avg of 5)
+64	  0.000714033	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 11
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-64	  0.118465	        (avg of 5)
+64	  0.00293214	        (avg of 5)
 
 ------------------------------------------
 Matrix size: 12
 
 MPI:
 N_procs|wall_clock_time (avg)|n_of_executions
-64	  0.494166	        (avg of 5)
+64	  0.0194392	        (avg of 5)
